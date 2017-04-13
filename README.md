@@ -1,3 +1,3 @@
 # ajax-package
 A simple package of ajax, the back will slowly improve
-test  aa
+一个简单封装的ajax，后续功能慢慢完善
