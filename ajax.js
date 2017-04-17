@@ -1,4 +1,6 @@
+// by Herpang
 //一个简单更新的ajax
+//发送成功和失败的的回调函数需要自己写，
 function ajax(options){
 	//创建一个XHR对象
 	function creatXHR(){
