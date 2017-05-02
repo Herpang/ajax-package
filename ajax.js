@@ -6,12 +6,12 @@
 		//创建一个XHR对象
 		function creatXHR(){
 		if(window.XMLHttpRequest){
-			return XMLHttpRequest();
+			return  new XMLHttpRequest();
 			}
 		}
 		function setData(){ //暂时只支持object的json化,后面会支持更多
 			if(data){
-				if(Object.prototype.toString.call(data) ==='[object Object]'){
+				if(typeof data === 'object'){
 					data = JSON.stringify(data);
 				}
 			}
@@ -20,7 +20,7 @@
 		var url = options.url || "", //请求的地址
 			type = (options.type || "get").toLowerCase(),  //统一转换成小写，默认为get请求
 			data = options.data || null, //默认为null
-			contentType = options.contentType || "json", //请求内容的格式，默认为json格式
+			contentType = options.contentType || "", //请求内容的格式，默认为json格式
 			dataType = options.dataType || "",//请求的类型，目前只支持jsonp类型
 			async = options.async || "true",  //请求是同步还是异步，默认为异步
 			timeOut = options.timeOut, //设置超时时间
