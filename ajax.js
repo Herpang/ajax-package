@@ -2,7 +2,7 @@
 //一个简单更新的ajax
 //发送成功和失败的的回调函数需要自己写，
 (function(window,undefined){
-	function ajax(options){
+	var ajax = function(options){
 		//创建一个XHR对象
 		function creatXHR(){
 		if(window.XMLHttpRequest){
@@ -16,7 +16,7 @@
 				}
 			}
 		}
-		//下面是处理下传入的参数
+		//处理下传入的参数
 		var url = options.url || "", //请求的地址
 			type = (options.type || "get").toLowerCase(),  //统一转换成小写，默认为get请求
 			data = options.data || null, //默认为null
@@ -28,13 +28,13 @@
 			error = options.error || function(){}, //请求失败时的执行函数
 			before = options.before || function(){}, //请求发送之前的执行函数
 		    xhr = creatXHR();
-		//这个函数是监听xhr对象的状态的函数
+		//监听xhr对象的状态
 		xhr.onreadystatechange = function () {
 			if(xhr.readyState === 4){ //这里其实应该判断的再准确点
 				if(xhr.status === 200){
 					success(xhr.responseText);
 				}else{
-					error(xhr.readyState,xhr.status);
+					error(xhr.readyState,xhr.status);//这里其实处理的不太好
 				}
 			}
 		}
@@ -42,12 +42,13 @@
 		if (type === "post" && !contentType) {
 	              //若是post提交，则设置content-Type 为application/x-www-four-urlencoded
 	              xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
-	        } else if (contentType) {
+	        }else if (contentType) {
 	              xhr.setRequestHeader("Content-Type", contentType);
 	    }
 	    setData();
 		xhr.send(type === "get" ? null : data); //判断要不要传入数据
 }
+window.ajax = ajax;
 })(window);
 
 
